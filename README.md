@@ -1,4 +1,5 @@
-graph TD
+```mermaid
+graph LR
     Projet70["Projet 70"]:::root
 
     Projet70 --> LivrableSyntheseProjet
@@ -44,3 +45,4 @@ graph TD
     classDef phase fill:#bbf,stroke:#333,stroke-width:2px,color:#000,font-weight:bold;
     classDef liv fill:#bfb,stroke:#333,stroke-width:2px,color:#000;
     classDef task fill:#ffa,stroke:#333,stroke-width:1px,color:#000;
+```
