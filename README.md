@@ -1,4 +1,4 @@
-graph LR
+graph TD
     Projet70["Projet 70"]:::root
 
     Projet70 --> LivrableSyntheseProjet
