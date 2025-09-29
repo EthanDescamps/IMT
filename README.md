@@ -1,5 +1,5 @@
 ```mermaid
-graph TD
+graph LR
     LivrableSyntheseProjet --> Plannification
     LivrableSyntheseProjet --> CreationDiagrammes
     LivrableSyntheseProjet --> RedactionSynthese
