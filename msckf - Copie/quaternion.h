@@ -1,5 +1,5 @@
 #pragma once
-
+#include "matrix.h"
 #include <array>
 
 class Quaternion {
@@ -11,7 +11,7 @@ public:
     Quaternion(double w, double x, double y, double z);
 
     Quaternion operator*(const Quaternion& q) const;
-    std::array<std::array<double,3>,3> toRotationMatrix() const;
+    Matrix toRotationMatrix() const;
     Quaternion normalized() const;
     void normalize();
     double norm() const;

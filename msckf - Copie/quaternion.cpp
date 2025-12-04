@@ -29,15 +29,16 @@ Quaternion Quaternion::normalized() const {
     return q;
 }
 
-std::array<std::array<double,3>,3> Quaternion::toRotationMatrix() const {
-    Quaternion q = this->normalized();
-    double ww = q.w*q.w, xx = q.x*q.x, yy = q.y*q.y, zz = q.z*q.z;
-    double wx = q.w*q.x, wy = q.w*q.y, wz = q.w*q.z;
-    double xy = q.x*q.y, xz = q.x*q.z, yz = q.y*q.z;
-
-    return {{
-        { 1.0 - 2.0*(yy + zz),     2.0*(xy - wz),         2.0*(xz + wy) },
-        {     2.0*(xy + wz),   1.0 - 2.0*(xx + zz),       2.0*(yz - wx) },
-        {     2.0*(xz - wy),       2.0*(yz + wx),     1.0 - 2.0*(xx + yy) }
-    }};
+Matrix Quaternion::toRotationMatrix() const {
+    Matrix R(3, 3);
+    R(1, 1) = 1 - 2 * (y * y + z * z);
+    R(1, 2) = 2 * (x * y - z * w);
+    R(1, 3) = 2 * (x * z + y * w);
+    R(2, 1) = 2 * (x * y + z * w);
+    R(2, 2) = 1 - 2 * (x * x + z * z);
+    R(2, 3) = 2 * (y * z - x * w);
+    R(3, 1) = 2 * (x * z - y * w);
+    R(3, 2) = 2 * (y * z + x * w);
+    R(3, 3) = 1 - 2 * (x * x + y * y);
+    return R;
 }
