@@ -1,0 +1,126 @@
+Command: C:\Users\jeann\.espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe C:\Users\jeann\esp\v5.5.1\esp-idf\tools/idf_monitor.py -p COM6 -b 115200 --toolchain-prefix xtensa-esp32s3-elf- --target esp32s3 --revision 0 C:\Users\jeann\Documents\IMT\Projet commande entreprise\ICM\build\ICM.elf C:\Users\jeann\Documents\IMT\Projet commande entreprise\ICM\build\bootloader\bootloader.elf --force-color -m 'C:\Users\jeann\.espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe' 'C:\Users\jeann\esp\v5.5.1\esp-idf\tools\idf.py' '-p' 'COM6'
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0x8 (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40377d92
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x158c
+load:0x403c8700,len:0xd24
+load:0x403cb700,len:0x2f34
+entry 0x403c8924
+[0;32mI (24) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (24) boot: compile time Dec  3 2025 15:40:56[0m
+[0;32mI (25) boot: Multicore bootloader[0m
+[0;32mI (25) boot: chip revision: v0.2[0m
+[0;32mI (27) boot: efuse block revision: v1.3[0m
+[0;32mI (31) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (35) boot.esp32s3: SPI Mode       : DIO[0m
+[0;32mI (39) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (42) boot: Enabling RNG early entropy source...[0m
+[0;32mI (47) boot: Partition Table:[0m
+[0;32mI (50) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (62) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (69) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (75) boot: End of partition table[0m
+[0;32mI (79) esp_image: segment 0: paddr=00010020 vaddr=3c020020 size=09358h ( 37720) map[0m
+[0;32mI (93) esp_image: segment 1: paddr=00019380 vaddr=3fc93600 size=028d8h ( 10456) load[0m
+[0;32mI (96) esp_image: segment 2: paddr=0001bc60 vaddr=40374000 size=043b8h ( 17336) load[0m
+[0;32mI (105) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=163d4h ( 91092) map[0m
+[0;32mI (125) esp_image: segment 4: paddr=000363fc vaddr=403783b8 size=0b1a0h ( 45472) load[0m
+[0;32mI (135) esp_image: segment 5: paddr=000415a4 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (141) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (141) boot: Disabling RNG early entropy source...[0m
+[0;32mI (153) cpu_start: Multicore app[0m
+[0;32mI (162) cpu_start: Pro cpu start user code[0m
+[0;32mI (162) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (162) app_init: Application information:[0m
+[0;32mI (162) app_init: Project name:     ICM[0m
+[0;32mI (165) app_init: App version:      1[0m
+[0;32mI (169) app_init: Compile time:     Dec  3 2025 15:40:28[0m
+[0;32mI (174) app_init: ELF file SHA256:  2b9a10cd2...[0m
+[0;32mI (178) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (182) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (186) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (190) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (194) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (200) heap_init: At 3FC96748 len 00052FC8 (331 KiB): RAM[0m
+[0;32mI (205) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (210) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (215) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (221) spi_flash: detected chip: generic[0m
+[0;32mI (224) spi_flash: flash io: dio[0m
+[0;33mW (227) spi_flash: Detected size(8192k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;33mW (239) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (249) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (256) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (263) main_task: Started on CPU0[0m
+[0;32mI (273) main_task: Calling app_main()[0m
+[0;32mI (273) ICM_DATA: Démarrage...[0m
+[0;32mI (273) ICM_DATA: ICM-20948 détecté ![0m
+[0;32mI (273) ICM_DATA: Capteur réveillé (PWR_MGMT_1 configuré).[0m
+-0.04,-0.03,1.06,0.21,0.11,0.19
+-0.05,-0.03,1.06,0.20,0.29,0.18
+-0.04,-0.03,1.06,0.56,0.56,-0.05
+-0.04,-0.03,1.06,0.05,0.44,0.26
+-0.05,-0.03,1.06,0.02,0.67,0.02
+-0.05,-0.03,1.06,0.32,0.18,0.14
+-0.04,-0.03,1.06,-0.05,0.27,0.35
+-0.05,-0.03,1.06,0.20,0.18,0.18
+-0.04,-0.03,1.06,0.28,0.40,0.32
+-0.05,-0.03,1.06,-0.02,0.23,-0.06
+-0.05,-0.03,1.06,0.28,0.23,0.11
+-0.05,-0.03,1.06,0.28,0.56,0.00
+-0.04,-0.03,1.06,0.28,0.20,0.11
+-0.04,-0.03,1.05,0.37,0.15,0.03
+-0.04,-0.03,1.06,0.09,0.37,0.15
+-0.05,-0.03,1.06,0.34,0.57,0.07
+-0.05,-0.03,1.06,0.02,0.53,0.12
+-0.05,-0.03,1.06,0.24,0.48,0.03
+-0.04,-0.03,1.06,0.07,0.14,0.18
+-0.04,-0.03,1.07,0.29,0.28,0.47
+-0.05,-0.03,1.06,0.18,0.24,0.05
+-0.05,-0.03,1.07,-0.03,0.16,0.15
+-0.05,-0.03,1.05,-0.01,0.24,0.23
+-0.04,-0.03,1.06,0.54,0.30,0.21
+-0.05,-0.03,1.06,-0.02,0.38,-0.21
+-0.04,-0.03,1.06,0.07,0.44,0.18
+-0.04,-0.02,1.07,0.32,0.37,0.08
+-0.05,-0.03,1.07,0.11,0.34,-0.23
+-0.05,-0.03,1.06,0.20,0.37,0.03
+-0.05,-0.03,1.06,-0.12,0.45,0.27
+-0.05,-0.03,1.07,0.01,0.12,0.08
+-0.04,-0.03,1.06,0.07,0.28,0.15
+-0.05,-0.02,1.06,-0.02,0.43,0.02
+-0.05,-0.03,1.06,0.06,0.27,0.30
+-0.04,-0.02,1.06,0.25,0.60,-0.08
+-0.05,-0.04,1.06,0.16,0.40,0.00
+-0.04,-0.03,1.06,-0.06,0.35,0.28
+-0.05,-0.03,1.07,0.25,0.34,0.11
+-0.05,-0.03,1.07,0.46,0.32,0.10
+-0.05,-0.03,1.06,0.43,0.18,0.03
+-0.04,-0.03,1.07,0.08,0.48,0.41
+-0.05,-0.03,1.06,0.20,0.18,0.03
+-0.04,-0.03,1.06,0.43,0.32,0.03
+-0.05,-0.02,1.06,0.37,0.18,0.34
+-0.04,-0.03,1.06,-0.02,0.24,0.27
+-0.04,-0.03,1.06,0.08,0.23,0.21
+-0.04,-0.03,1.06,0.47,0.34,0.31
+-0.05,-0.03,1.07,0.60,0.50,0.03
+-0.05,-0.03,1.06,0.26,0.24,0.27
+-0.04,-0.03,1.06,0.38,0.39,0.21
+-0.05,-0.03,1.06,0.13,0.19,0.14
+-0.05,-0.03,1.06,0.11,0.16,0.16
+-0.04,-0.03,1.06,0.22,0.27,-0.05
+-0.05,-0.03,1.06,0.17,0.14,0.02
+-0.05,-0.03,1.06,0.14,0.29,-0.11
+-0.05,-0.03,1.06,-0.15,0.34,0.00
+-0.05,-0.03,1.07,0.28,0.23,0.15
+-0.05,-0.03,1.07,0.20,0.24,0.06
+-0.05,-0.03,1.06,0.21,0.45,0.04
+-0.04,-0.03,1.07,0.11,0.03,0.24
+-0.04,-0.03,1.06,0.20,0.47,0.35
+-0.05,-0.03,1.06,0.20,0.18,0.20
+-0.05,-0.03,1.07,0.31,0.28,0.08
+-0.06,-0.03,1.09,-0.02,0.95,-0.11
