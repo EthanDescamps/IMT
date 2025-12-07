@@ -12,6 +12,10 @@ class Vector3d {
         Vector3d();
         Vector3d(double x,double y,double z);
 
+        double getX() const;
+        double getY() const;
+        double getZ() const;
+
         //méthodes
         Vector3d minus(const Vector3d & other);
         Vector3d plus(const Vector3d & other);
