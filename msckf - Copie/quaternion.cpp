@@ -4,6 +4,22 @@
 Quaternion::Quaternion() : w(1.0), x(0.0), y(0.0), z(0.0) {}
 Quaternion::Quaternion(double w, double x, double y, double z) : w(w), x(x), y(y), z(z) {}
 
+double Quaternion::getW() const {
+    return w;
+}
+
+double Quaternion::getX() const {
+    return x;
+}
+
+double Quaternion::getY() const {
+    return y;
+}
+
+double Quaternion::getZ() const {
+    return z;
+}
+
 Quaternion Quaternion::operator*(const Quaternion& q) const {
     return Quaternion(
         w*q.w - x*q.x - y*q.y - z*q.z,
