@@ -1,4 +1,4 @@
-SRC = matrix.cpp quaternion.cpp vector3d.cpp main.cpp
+SRC = matrix.cpp quaternion.cpp vector3d.cpp msckf.cpp main.cpp
 OBJ = $(SRC:.cpp=.o) 
 CXXFLAGS = -Wall -g -w
 
