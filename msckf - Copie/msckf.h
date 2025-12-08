@@ -14,6 +14,7 @@ class MSCKF {
         // constructeur par défaut
         MSCKF();
         Matrix create_G_Matrix(const Quaternion& q);
+        Matrix create_F_Matrix(const Quaternion& q, const Vector3d& a, const Vector3d& w);
         // destructeur
         ~MSCKF() = default;
 
