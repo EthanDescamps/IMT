@@ -13,7 +13,7 @@ class MSCKF {
     public:
         // constructeur par défaut
         MSCKF();
-
+        Matrix create_G_Matrix(const Quaternion& q);
         // destructeur
         ~MSCKF() = default;
 
