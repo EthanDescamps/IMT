@@ -7,7 +7,7 @@ Matrix MSCKF::create_G_Matrix(const Quaternion& q) {
     Matrix R_I = q.toRotationMatrix();
     Matrix G(15,12);
     G.Fill(0.0);
-    for (unsigned i =1; i <16; i++){
+    for (unsigned i =1; i <13; i++){
         if (i>=1 && i<=3){
             G(i,i)= -1;
         }
@@ -22,7 +22,7 @@ Matrix MSCKF::create_G_Matrix(const Quaternion& q) {
         else if (i>=10 && i<=12){
             G(i,i)= 1;
         }
-        G(i,i) = 1;
+        
     }
     return G;
 }

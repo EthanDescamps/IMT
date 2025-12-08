@@ -18,6 +18,7 @@ int main(int argc, char** argv){
     Quaternion q = Quaternion();
     MSCKF msckf;
     Matrix G = msckf.create_G_Matrix(q);
+    cout << G << endl;
     Matrix Ax(3,3);
     Ax(1,1) = 0; Ax(1,2) = -a_z; Ax(1,3) = a_y;
     Ax(2,1) = a_z; Ax(2,2) = 0; Ax(2,3) = -a_x;
@@ -88,15 +89,12 @@ int main(int argc, char** argv){
                 }
             }
     }
-    cout << "Ax (3x3) :" << endl << Ax << endl;
-    cout << "wx (3x3) :" << endl << wx << endl;
-    cout << "R_I (3x3) :" << endl << R_I << endl;
+    //cout << "Ax (3x3) :" << endl << Ax << endl;
+    //cout << "wx (3x3) :" << endl << wx << endl;
+    //cout << "R_I (3x3) :" << endl << R_I << endl;
 
-    cout << "F (15x15) :" << endl << F << endl;
+    // cout << "F (15x15) :" << endl << F << endl;
 
-    cout << "-- Fin du programme --" << endl;
-    cout << "Appuyez sur Entrée pour quitter..." << endl;
-    std::cin.get();
 
     return 0;
 }}
