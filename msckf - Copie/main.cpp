@@ -11,6 +11,8 @@ int main(int argc, char** argv){
 
     // matrice de rotation identité par défaut (évite l'utilisation de mémoire non initialisée)
     Quaternion q = Quaternion();
+    Matrix Ri = q.toRotationMatrix();
+    cout << Ri <<endl;
     MSCKF msckf;
     Matrix G = msckf.create_G_Matrix(q);
     
