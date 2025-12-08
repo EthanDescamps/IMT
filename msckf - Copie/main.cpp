@@ -5,23 +5,18 @@
 using namespace std;
 
 int main(int argc, char** argv){
-    int a_x;
-    int a_y;
-    int a_z;
-    int w_x;
-    int w_y;
-    int w_z;
+    int a_x = 0;
+    int a_y = 0;
+    int a_z = 0;
+    int w_x = 0;
+    int w_y = 0;
+    int w_z = 0;
 
-    Matrix R_I(3,3); // à modifier
+    // matrice de rotation identité par défaut (évite l'utilisation de mémoire non initialisée)
+    Matrix R_I = Eye(3);
 
-    Matrix G(15,12);
-    for(int ligne = 1;ligne<16;ligne++){
-        for(int colonne = 1;colonne<13;colonne++){
-            G(ligne,colonne) = 0;
-        }
-    }
-    
-    cout << G << endl;
+    // message de debug initial pour vérifier que le programme démarre
+    cout << "-- Début du programme --" << endl;
 
     Matrix Ax(3,3);
     Ax(1,1) = 0; Ax(1,2) = -a_z; Ax(1,3) = a_y;
@@ -93,6 +88,13 @@ int main(int argc, char** argv){
                 }
             }
     }
-    cout << F << endl;
+    cout << "Ax (3x3) :" << endl << Ax << endl;
+    cout << "wx (3x3) :" << endl << wx << endl;
+    cout << "R_I (3x3) :" << endl << R_I << endl;
+
+    cout << "F (15x15) :" << endl << F << endl;
+
+    cout << "-- Fin du programme --" << endl;
+    
     return 0;
 }}
