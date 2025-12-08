@@ -46,23 +46,23 @@ Matrix MSCKF::create_F_Matrix(const Quaternion& q, const Vector3d& a, const Vect
     Matrix AxR = Ax * R_I;
     // Construction de la matrice F, définie par blocs
     Matrix F(15);
-    F.fill();
+    F.Fill(0.0);
     for (unsigned i =1; i <16; i++){
         if (i>=1 && i<=3){
             for (unsigned j=1; j<=3; j++){
                 F(i,j)= -wx(i,j);
             };
             F(i,i+3)= -1;
-            };
-        }
+            }
         else if (i>=7 && i<=9){
             for (unsigned j=1; j<=3; j++){
                 F(i,j) = -AxR(i-6,j);
                 F(i,j+9) = -R_I(i-6,j);
             }           
         }
-        else if (i>=12 && i<=15){
+        else if (i>=13 && i<=15){
             F(i,i-6)= 1;
         }
     }
     return F;
+}
