@@ -12,7 +12,7 @@ int main(int argc, char** argv){
     int w_y;
     int w_z;
 
-    matrix<double> R_I(3,3); // à modifier
+    Matrix R_I(3,3); // à modifier
 
     Matrix G(15,12);
     for(int ligne = 1;ligne<16;ligne++){
@@ -70,13 +70,13 @@ int main(int argc, char** argv){
             } else if (ligne == 3 && colonne == 1) {
                 for(int i=1;i<4;i++){
                     for(int j=1;j<4;j++){
-                        F(i+6,j) = (-R_I * Ax)[i,j];
+                        F(i+6,j) = -(R_I * Ax)(i,j);
                     }
                 }
             } else if (ligne == 3 && colonne == 4) {
                 for(int i=1;i<4;i++){
                     for(int j=1;j<4;j++){
-                        F(i+6,j+9) = -R_I[i,j];
+                        F(i+6,j+9) = -R_I(i,j);
                     }
                 }
             } else if (ligne == 5 && colonne == 4) {
@@ -95,4 +95,4 @@ int main(int argc, char** argv){
     }
     cout << F << endl;
     return 0;
-}
+}}
