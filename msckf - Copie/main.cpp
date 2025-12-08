@@ -1,6 +1,7 @@
 #include "matrix.h"
 #include "quaternion.h"
 #include "vector3d.h"
+#include "msckf.h"
 #include <iostream>
 using namespace std;
 
@@ -14,10 +15,9 @@ int main(int argc, char** argv){
 
     // matrice de rotation identité par défaut (évite l'utilisation de mémoire non initialisée)
     Matrix R_I = Eye(3);
-
-    // message de debug initial pour vérifier que le programme démarre
-    cout << "-- Début du programme --" << endl;
-
+    Quaternion q = Quaternion();
+    MSCKF msckf;
+    Matrix G = msckf.create_G_Matrix(q);
     Matrix Ax(3,3);
     Ax(1,1) = 0; Ax(1,2) = -a_z; Ax(1,3) = a_y;
     Ax(2,1) = a_z; Ax(2,2) = 0; Ax(2,3) = -a_x;
@@ -95,6 +95,8 @@ int main(int argc, char** argv){
     cout << "F (15x15) :" << endl << F << endl;
 
     cout << "-- Fin du programme --" << endl;
-    
+    cout << "Appuyez sur Entrée pour quitter..." << endl;
+    std::cin.get();
+
     return 0;
-}}
+}
