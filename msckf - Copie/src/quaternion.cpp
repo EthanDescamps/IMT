@@ -33,6 +33,11 @@ double Quaternion::norm() const {
     return std::sqrt(w*w + x*x + y*y + z*z);
 }
 
+void Quaternion::setW(double ww) { w = ww; }
+void Quaternion::setX(double xx) { x = xx; }
+void Quaternion::setY(double yy) { y = yy; }
+void Quaternion::setZ(double zz) { z = zz; }
+
 void Quaternion::normalize() {
     double n = norm();
     if (n == 0.0) { w = 1.0; x = y = z = 0.0; return; }
@@ -58,3 +63,5 @@ Matrix Quaternion::toRotationMatrix() const {
     R(3, 3) = 1 - 2 * (x * x + y * y);
     return R;
 }
+
+

@@ -5,6 +5,7 @@
 #include <cstring>		// enable memcpy
 #include <cassert>		// enable assert
 #include <ostream>
+#include "vector3d.h"
 
 		// forward declaration (see below)
 
@@ -51,8 +52,9 @@ Matrix Eye(const unsigned);					// identity matrix
 Matrix Transpose(Matrix);					// transpose matrix
 std::ostream& operator << (std::ostream&, const Matrix);
 
-
-
+// multiplie R (3x3) par v, écrit le résultat dans out
+Vector3d multiplyRbyVector(const Matrix& R, const Vector3d& v);
+void multiplyRbyVector(const Matrix& R, const Vector3d& v, Vector3d& out);
 
 
 
