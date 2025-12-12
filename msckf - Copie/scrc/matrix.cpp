@@ -27,20 +27,12 @@ Matrix::Matrix(const Matrix& src)	// copy constructor
 	std::memcpy(mData, src.mData, mRows* mCols* sizeof(double));}
 
 
-Matrix::Matrix(const Vector<double>& src)	// construct from Vector
-{	mRows= src.Length(); mCols= 1;
-	mData= new double[mRows];	// deep copy from Vector source
-	std::memcpy(mData, &src[0], mRows* sizeof(double));}
+
 
 // Provide specialization of Vector<double> constructor from Matrix
 // here (one definition only) to avoid multiple-definition errors.
-template<>
-Vector<double>::Vector(const Matrix& src)
-{
-	vLen = src.rows() * src.cols();
-	vData = new double[vLen];
-	std::memcpy(vData, src[0], vLen * sizeof(double));
-}
+
+
 
 
 Matrix& Matrix::operator=(const Matrix& src)	// assignment operator=
@@ -166,6 +158,4 @@ std::ostream& operator << (std::ostream& os, const Matrix m)	// output
 
 #endif	// matrix_CPP
 
-// Explicit template instantiations to ensure symbols are emitted
-template class Vector<double>;
-template class Vector<unsigned>;
+
