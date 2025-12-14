@@ -13,23 +13,9 @@ extern "C" void app_main(void) {
     // Optionnel : petite pause pour laisser le port série s'initialiser
     vTaskDelay(pdMS_TO_TICKS(1000));
 
-    cout << "--- Demarrage MSCKF ESP32 ---" << endl;
+    MSCKF state_v  = MSCKF();
 
-    Vector3d a = Vector3d();
-    Vector3d w = Vector3d();
-
-    // matrice de rotation identité par défaut
-    Quaternion q = Quaternion();
-    Matrix Ri = q.toRotationMatrix();
-    cout << "Matrice de Rotation (Ri):" << endl;
-    cout << Ri << endl;
-
-    MSCKF msckf;
-    Matrix G = msckf.create_G_Matrix(q); //
-    
-    Matrix F = msckf.create_F_Matrix(q, a, w); //
-    cout << "Matrice F:" << endl;
-    cout << F << endl; 
+    cout << state_v.pos.getX() << ", " << state_v.pos.getY() << ", " << state_v.pos.getZ() << endl;
 
     cout << "--- Fin du calcul ---" << endl;
     

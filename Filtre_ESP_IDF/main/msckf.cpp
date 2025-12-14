@@ -5,7 +5,12 @@
 #include <cmath>
 
 
-MSCKF::MSCKF() : quaternion(1,0,0,0), bg(0,0,0), vit(0,0,0), ba(0,0,0), pos(0,0,0) {}
+MSCKF::MSCKF()
+    : pos(0,0,0),
+      vit(0,0,0),
+      quaternion(1,0,0,0),
+      bg(0,0,0),
+      ba(0,0,0) {}
 
 // setters
 void MSCKF::setPos(const Vector3d& p) { pos = p; }
@@ -16,7 +21,7 @@ void MSCKF::setBa(const Vector3d& b_a) { ba = b_a; }
 
 Matrix MSCKF::create_Wk_Matrix(const MSCKF& Statevector, const ImuMeasurement &u_k) {
     double dt = u_k.dt;
-    Matrix R_I = Statevector.quaternion.toRotationMatrix();
+    Matrix R_I = Statevector.Squaternion.toRotationMatrix();
     Matrix Wk(15,12);
     Wk.Fill(0.0);
     //bloc bruit acc

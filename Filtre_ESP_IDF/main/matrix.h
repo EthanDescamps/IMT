@@ -15,7 +15,7 @@
 class Matrix
 {	public:
 
-	Matrix(): mRows(0), mCols(0), mData(nullptr) {};	// default constructor
+	Matrix() : mData(nullptr), mRows(0), mCols(0) {}// default constructor
 	Matrix(const unsigned);					// constructor of a square matrix
 	Matrix(const unsigned, const unsigned);	// constructor of a rectangular matrix
 	Matrix Let(std::initializer_list<double>);
