@@ -6,7 +6,6 @@
 #include "matrix.h"			// header file
 
 
-
 // class MatrixException
 // {	public:
 // 		std::string msg;
@@ -142,6 +141,20 @@ std::ostream& operator << (std::ostream& os, const Matrix m)	// output
 			os << std::setw(11) << std::right << m[i][j] << " " ;}
 	return os;}
 
+void multiplyRbyVector(const Matrix& R, const Vector3d& v, Vector3d& out) {
+    assert(R.rows() == 3 && R.cols() == 3);
+    double x = R(1,1)*v.getX() + R(1,2)*v.getY() + R(1,3)*v.getZ();
+    double y = R(2,1)*v.getX() + R(2,2)*v.getY() + R(2,3)*v.getZ();
+    double z = R(3,1)*v.getX() + R(3,2)*v.getY() + R(3,3)*v.getZ();
+    out.setX(x);
+    out.setY(y);
+    out.setZ(z);
+}
+Vector3d multiplyRbyVector(const Matrix& R, const Vector3d& v) {
+    Vector3d out;
+    multiplyRbyVector(R, v, out);
+    return out;
+}
 
 // void Matrix::input()			//	manual input of matrix via console
 // {	std::cout << "Enter the elements of the " << mRows << " x " << mCols << " Matrix: " << std::endl;
