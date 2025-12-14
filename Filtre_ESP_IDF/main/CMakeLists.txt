@@ -5,4 +5,5 @@ idf_component_register(
          "vector3d.cpp"
          "msckf.cpp"
     INCLUDE_DIRS "."
+    PRIV_REQUIRES driver freertos
 )

@@ -21,7 +21,7 @@ void MSCKF::setBa(const Vector3d& b_a) { ba = b_a; }
 
 Matrix MSCKF::create_Wk_Matrix(const MSCKF& Statevector, const ImuMeasurement &u_k) {
     double dt = u_k.dt;
-    Matrix R_I = Statevector.Squaternion.toRotationMatrix();
+    Matrix R_I = Statevector.quaternion.toRotationMatrix();
     Matrix Wk(15,12);
     Wk.Fill(0.0);
     //bloc bruit acc
