@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "Filtre",
-    "project_version":    "ae02932-dirty",
+    "project_version":    "8984bff-dirty",
     "project_path":       "C:/Users/desca/Documents/IMT_Atlantique/S7/Commande_entreprise/MSCKF/IMT/Filtre_ESP_IDF",
     "idf_path":           "C:/Users/desca/esp/v5.5.1/esp-idf",
     "build_dir":          "C:/Users/desca/Documents/IMT_Atlantique/S7/Commande_entreprise/MSCKF/IMT/Filtre_ESP_IDF/build",
