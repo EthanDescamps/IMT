@@ -224,3 +224,17 @@ MSCKF MSCKF::PredictState(const MSCKF& x_prev, const ImuMeasurement& u_k) {
     x_pred.bg = x_prev.bg;
     return x_pred;
 }
+
+Matrix MSCKF::PredictCovariance(Matrix& P_prev,const MSCKF Statevector,const ImuMeasurement &u_k){
+    // cas par défaut : si P_prev non initialisée -> retourner P0_init()
+    if (P_prev.rows() == 0 || P_prev.cols() == 0) {
+        return P0_init();
+    }
+    Matrix Q(15);
+    Q = defineProcessNoiseMatrix(Statevector,u_k);
+    Matrix F(15);
+    F = create_F_Matrix(Statevector.quaternion,u_k.acc,u_k.gyro);
+    // comportement par défaut : ne pas modifier et renvoyer P_prev
+    // (remplacer par P_pred = F * P_prev * F^T + Q si tu implémente F et Q)
+    return F*P_prev*Transpose(F)+Q;
+}

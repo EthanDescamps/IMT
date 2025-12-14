@@ -18,6 +18,7 @@ class MSCKF {
         Matrix defineProcessNoiseMatrix(const MSCKF Statevector,const ImuMeasurement &u_k);
         Matrix BuildNoiseCovarianceMatrix();
         Matrix P0_init();
+        Matrix PredictCovariance(Matrix& P_prev,const MSCKF Statevector,const ImuMeasurement &u_k);
         MSCKF PredictState(const MSCKF& x_prev, const ImuMeasurement& u_k);
         // destructeur
         ~MSCKF() = default;
