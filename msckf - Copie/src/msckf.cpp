@@ -1,5 +1,5 @@
-#include "msckf.h"
 #include "types.h"
+#include "msckf.h"
 #include "vector3d.h"
 #include "quaternion.h"
 #include <cmath>
@@ -14,29 +14,67 @@ void MSCKF::setQuaternion(const Quaternion& q) { quaternion = q; }
 void MSCKF::setBg(const Vector3d& b_g) { bg = b_g; }
 void MSCKF::setBa(const Vector3d& b_a) { ba = b_a; }
 
-Matrix MSCKF::create_G_Matrix(const Quaternion& q) {
-    Matrix R_I = q.toRotationMatrix();
-    Matrix G(15,12);
-    G.Fill(0.0);
-    for (unsigned i =1; i <13; i++){
-        if (i>=1 && i<=3){
-            G(i,i)= -1;
+Matrix MSCKF::create_Wk_Matrix(const MSCKF& Statevector, const ImuMeasurement &u_k) {
+    double dt = u_k.dt;
+    Matrix R_I = Statevector.quaternion.toRotationMatrix();
+    Matrix Wk(15,12);
+    Wk.Fill(0.0);
+    //bloc bruit acc
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            Wk(4 + i,j) = R_I(i,j)*dt;
         }
-        else if (i>=4 && i<=6){
-            G(i,i)= 1;
-        }
-        else if (i>=7 && i<=9){
-            for (unsigned j=7; j<=9; j++){
-                G(i,j) = -R_I(i-6,j-6);
-            }
-        }
-        else if (i>=10 && i<=12){
-            G(i,i)= 1;
-        }
-        
     }
-    return G;
+    // Bloc bruit gyro.
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            Wk(7 + i,4 + j) = -R_I(i,j) * dt;
+        }
+    }
+    // Bloc biais gyro.
+    Wk(10,7) = Wk(11,8) = Wk(12,9) = 1.0; 
+
+    // Bloc biais acc.
+    Wk(13,10) = Wk(14,11) = Wk(15,12) = 1.0;
+    return Wk;
 }
+
+Matrix MSCKF::BuildNoiseCovarianceMatrix() {
+    // Initialiser Qw
+    Matrix Qw(12,12);
+    Qw.Fill(0.0);
+
+    // Définitions des DSP
+    const double PSD_A = 2.0e-2;  // Bruit Accel
+    const double PSD_G = 3.0e-4;  // Bruit Gyro
+    const double BRW_G = 1.0e-7;  // Random Walk Biais Gyro
+    const double BRW_A = 1.0e-5;  // Random Walk Biais Accel
+
+    // Bruit acc.
+    Qw(1,1) = Qw(2,2) = Qw(3,3) = PSD_A;
+    // Bruit gyro.
+    Qw(4,4) = Qw(5,5) = Qw(6,6) = PSD_G;
+    // Biais gyro.
+    Qw(7,7) = Qw(8,8) = Qw(9,9) = BRW_G;
+    // Biais acc.
+    Qw(10,10) = Qw(11,11) = Qw(12,12) = BRW_A;
+    return Qw;
+}
+Matrix MSCKF::defineProcessNoiseMatrix(const MSCKF Statevector,const ImuMeasurement &u_k){
+    //def de Q
+    Matrix Q(15,15);
+    Matrix Wk(15,12);
+    Matrix Wk_t(12,15);
+    Matrix Qw(12);
+    Qw = BuildNoiseCovarianceMatrix();
+    Wk = create_Wk_Matrix(Statevector,u_k);
+    Wk_t = Transpose(Wk);
+    Q = Wk*Qw*Wk_t;
+    return Q;
+}
+    
+    
+
 
 Matrix MSCKF::create_F_Matrix(const Quaternion& q, const Vector3d& a, const Vector3d& w) {
     // Extraction des composantes des vecteurs
@@ -103,7 +141,7 @@ Matrix MSCKF::P0_init(){
     return P0;
 }
 
-MSCKF PredictState(const MSCKF& x_prev, const ImuMeasurement& u_k) {
+MSCKF MSCKF::PredictState(const MSCKF& x_prev, const ImuMeasurement& u_k) {
     MSCKF x_pred ; 
     float dt = u_k.dt;
     Vector3d omega_corr;

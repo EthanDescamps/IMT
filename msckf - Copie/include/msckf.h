@@ -13,9 +13,12 @@ class MSCKF {
     public:
         // constructeur par défaut
         MSCKF();
-        Matrix create_G_Matrix(const Quaternion& q);
+        Matrix create_Wk_Matrix(const MSCKF& Statevector, const ImuMeasurement &u_k);
         Matrix create_F_Matrix(const Quaternion& q, const Vector3d& a, const Vector3d& w);
+        Matrix defineProcessNoiseMatrix(const MSCKF Statevector,const ImuMeasurement &u_k);
+        Matrix BuildNoiseCovarianceMatrix();
         Matrix P0_init();
+        MSCKF PredictState(const MSCKF& x_prev, const ImuMeasurement& u_k);
         // destructeur
         ~MSCKF() = default;
 
@@ -33,3 +36,4 @@ class MSCKF {
     void setBg(const Vector3d& b_g);
     void setBa(const Vector3d& b_a);
 };
+
