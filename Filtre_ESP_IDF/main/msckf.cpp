@@ -5,12 +5,7 @@
 #include <cmath>
 
 
-MSCKF::MSCKF()
-    : pos(0,0,0),
-      vit(0,0,0),
-      quaternion(1,0,0,0),
-      bg(0,0,0),
-      ba(0,0,0) {}
+MSCKF::MSCKF() : pos(0,0,0), vit(0,0,0), quaternion(1,0,0,0), bg(0,0,0), ba(0,0,0) {}
 
 // setters
 void MSCKF::setPos(const Vector3d& p) { pos = p; }
@@ -24,16 +19,16 @@ Matrix MSCKF::create_Wk_Matrix(const MSCKF& Statevector, const ImuMeasurement &u
     Matrix R_I = Statevector.quaternion.toRotationMatrix();
     Matrix Wk(15,12);
     Wk.Fill(0.0);
-    //bloc bruit acc
+    //bloc bruit acc (utilisation d'indices 1-based pour operator())
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
-            Wk(4 + i,j) = R_I(i,j)*dt;
+            Wk(4 + i, 1 + j) = R_I(1 + i, 1 + j) * dt;
         }
     }
-    // Bloc bruit gyro.
+    // Bloc bruit gyro (indices 1-based)
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
-            Wk(7 + i,4 + j) = -R_I(i,j) * dt;
+            Wk(7 + i, 4 + j) = -R_I(1 + i, 1 + j) * dt;
         }
     }
     // Bloc biais gyro.
@@ -53,7 +48,7 @@ Matrix MSCKF::BuildNoiseCovarianceMatrix() {
     const double PSD_A = 2.0e-7;  // Bruit Accel
     const double PSD_G = 5.0499e-10;  // Bruit Gyro
     const double BRW_G = 4.3238e-15;  // Random Walk Biais Gyro
-    const double BRW_A = 1.0e-10;  // Random Walk Biais Accel
+    const double BRW_A = 1.0e-10; // Random Walk Biais Accel
 
     // Bruit acc.
     Qw(1,1) = Qw(2,2) = Qw(3,3) = PSD_A;
@@ -206,7 +201,7 @@ MSCKF MSCKF::PredictState(const MSCKF& x_prev, const ImuMeasurement& u_k) {
     Vector3d acc_global = multiplyRbyVector(R_I, acc_corr); // a_global = R * a_corrigee
     
     // Soustraction de la gravité (Repère Global ENU: gravité sur Z négatif)
-    acc_global.setY(acc_global.getY()-G_NORM);
+    acc_global.setY(acc_global.getY()-9.81);
 
     // v_pred = v_prev + a_global * dt
     //x_pred.v[i] = x_prev.v[i] + acc_global[i] * dt;
