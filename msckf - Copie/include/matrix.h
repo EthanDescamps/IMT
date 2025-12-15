@@ -6,6 +6,7 @@
 #include <cassert>		// enable assert
 #include <ostream>
 #include "vector3d.h"
+#include "types.h"
 
 		// forward declaration (see below)
 
