@@ -106,7 +106,6 @@ int main() {
         state.setBg(Vector3d(0,0,0));
         state.setBa(Vector3d(0,0,0));
     }
-
     // matrice de covariance initiale
     Matrix P_prev = filter.P0_init();
 
@@ -119,7 +118,6 @@ int main() {
         u.dt = static_cast<float>(dt);
         u.acc = data[i].a;
         u.gyro = data[i].w;
-
         // prédiction d'état
         state = filter.PredictState(state, u);
 
@@ -133,6 +131,7 @@ int main() {
                       << state.quaternion.getX() << ","
                       << state.quaternion.getY() << ","
                       << state.quaternion.getZ() << ")"
+                      << " vit=(" << state.vit.getX() << "," << state.vit.getY() << "," << state.vit.getZ() << ")"
                       << " pos=(" << state.pos.getX() << "," << state.pos.getY() << "," << state.pos.getZ() << ")\n";
         }
     }

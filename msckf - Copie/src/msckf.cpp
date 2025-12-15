@@ -206,7 +206,8 @@ MSCKF MSCKF::PredictState(const MSCKF& x_prev, const ImuMeasurement& u_k) {
     // v_pred = v_prev + a_global * dt
     //x_pred.v[i] = x_prev.v[i] + acc_global[i] * dt;
     Vector3d vit_tmp = x_prev.vit;
-    vit_tmp.plus(acc_global * dt);
+    // plus() retourne un nouveau Vector3d — il faut assigner le résultat
+    vit_tmp = vit_tmp.plus(acc_global * dt);
     x_pred.setVit(vit_tmp);
 
     
@@ -216,7 +217,8 @@ MSCKF MSCKF::PredictState(const MSCKF& x_prev, const ImuMeasurement& u_k) {
     
         // p_pred = p_prev + v_prev * dt + 0.5 * a_global * dt^2
     Vector3d pos_tmp = x_prev.pos;
-    pos_tmp.plus(acc_global*(dt*0.5*dt));
+    // plus() retourne un nouveau Vector3d — il faut assigner le résultat
+    pos_tmp = pos_tmp.plus(acc_global*(dt*0.5*dt));
     x_pred.setPos(pos_tmp);
     
     // --- Propagation des biais modélisés comme constants ---
