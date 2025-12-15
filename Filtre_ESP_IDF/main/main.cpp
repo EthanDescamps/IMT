@@ -70,6 +70,8 @@ static void imu_task(void *arg)
     uint8_t raw[12];
     TickType_t last = xTaskGetTickCount();
 
+    Matrix P_pred = msckf->P0_init();
+    
     while (true) {
         TickType_t now = xTaskGetTickCount();
         float dt = (now - last) * portTICK_PERIOD_MS / 1000.0f;
@@ -97,13 +99,19 @@ static void imu_task(void *arg)
             u.gyro.setZ(gz_r / GYRO_SENSITIVITY);
 
             /* ===== ICI TU APPELLES TON MSCKF ===== */
+            msckf->PredictState(*msckf, u);
+            printf("Predicted Position: [%.4f, %.4f, %.4f]\n",
+                   msckf->pos.getX(), msckf->pos.getY(), msckf->pos.getZ());
+            P_pred = msckf->PredictCovariance(P_pred,*msckf,u);
+            printf("Predicted Covariance P: %.6f\n", P_pred);
+
             // msckf->predict(u);
             // msckf->update(...);
 
-            printf("ACC: [%.2f, %.2f, %.2f] | GYRO: [%.2f, %.2f, %.2f]\n",
+            /*printf("ACC: [%.2f, %.2f, %.2f] | GYRO: [%.2f, %.2f, %.2f]\n",
        u.acc.getX(), u.acc.getY(), u.acc.getZ(),
-       u.gyro.getX(), u.gyro.getY(), u.gyro.getZ());
-
+       u.gyro.getX(), u.gyro.getY(), u.gyro.getZ());*/
+            
         }
 
         vTaskDelay(pdMS_TO_TICKS(200));

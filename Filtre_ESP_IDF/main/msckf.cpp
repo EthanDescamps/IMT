@@ -50,10 +50,10 @@ Matrix MSCKF::BuildNoiseCovarianceMatrix() {
     Qw.Fill(0.0);
 
     // Définitions des DSP
-    const double PSD_A = 2.0e-2;  // Bruit Accel
-    const double PSD_G = 3.0e-4;  // Bruit Gyro
-    const double BRW_G = 1.0e-7;  // Random Walk Biais Gyro
-    const double BRW_A = 1.0e-5;  // Random Walk Biais Accel
+    const double PSD_A = 2.0e-7;  // Bruit Accel
+    const double PSD_G = 5.0499e-10;  // Bruit Gyro
+    const double BRW_G = 4.3238e-15;  // Random Walk Biais Gyro
+    const double BRW_A = 1.0e-10;  // Random Walk Biais Accel
 
     // Bruit acc.
     Qw(1,1) = Qw(2,2) = Qw(3,3) = PSD_A;
@@ -125,8 +125,8 @@ Matrix MSCKF::P0_init(){
     const float sigma_p_sq = std::pow(1e-4,2);
     const float sigma_v_sq = std::pow(0.01,2);
     const float sigma_theta_sq = std::pow(1e-4,2);
-    const float sigma_bg_sq = std::pow(0.001,2);
-    const float sigma_ba_sq = std::pow(0.005,2);
+    const float sigma_bg_sq = std::pow(4.6518e-12,1);
+    const float sigma_ba_sq = std::pow(2.0e-10,1);
     Matrix P0(15,15);
     P0(1,1) = sigma_p_sq;
     P0(2,2) = sigma_p_sq;

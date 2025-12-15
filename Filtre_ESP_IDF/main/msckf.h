@@ -3,6 +3,7 @@
 #include "quaternion.h"
 #include "vector3d.h"
 #include "matrix.h"
+#include "types.h"
 
 
 
